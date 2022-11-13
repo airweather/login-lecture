@@ -3,7 +3,7 @@
 class UserStorage {
     //# : 변수를 private처럼
     static #users = {
-        id: ['a', 'abc', 'aaaa'],
+        id: ['a', 'abc', 'ccc'],
         password: ['123', '1234', '12345'],
         name : ['aaa', 'bbb', 'ccc'],
     }
@@ -18,6 +18,18 @@ class UserStorage {
         }, {});
         
         return newUsers;
+    }
+
+    static getUserInfo(id) {
+        const users = this.#users;
+        const idx = users.id.indexOf(id);
+        const usersKeys = Object.keys(users); 
+        const userInfo = usersKeys.reduce((newUsers, info) => {
+            newUsers[info] = users[info][idx];
+            return newUsers;
+        }, {}); 
+
+        return userInfo;
     }
 }
 
