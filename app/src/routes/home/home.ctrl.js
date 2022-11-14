@@ -24,9 +24,18 @@ const process = {
         const response = user.login();
         console.log(response);
         return res.json(response);
+        
+    },
+    
+    register: (req, res) => {
+        const user = new User(req.body);
+        const response = user.register();
+        return res.json(response);
 
-    }
+    },
 }
+
+
 module.exports = {
     //key가 없으면 hello : hello형태
     output,
