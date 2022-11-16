@@ -1,4 +1,4 @@
-const { createLogger, transports, format } = require('winston');
+const { createLogger, transports, format, Logger } = require('winston');
 const {combine, timestamp, label, json, simple, colorize, printf} = format;
 
 const printFormat = printf(({timestamp, label, level, message}) => {
@@ -42,6 +42,10 @@ const logger = createLogger({
 
 if(process.env.NODE_ENV !== "production") {
     logger.add(opts.console);
+}
+
+logger.stream = {
+    write: (message) => Logger.info(message),
 }
 
 module.exports = logger;
